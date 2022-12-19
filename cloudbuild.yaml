@@ -14,7 +14,7 @@ steps:
     args: 
       - '-c'
       - |
-          gcloud container images add-tag gcr.io/$PROJECT_ID/$APP_NAME:${SHORT_SHA} \
+          gcloud container images add-tag gcr.io/$PROJECT_ID/$APP_NAME:myapp \
             gcr.io/$PROJECT_ID/$APP_NAME:$TAG_NAME \
             --quiet
 
@@ -37,6 +37,3 @@ steps:
          
 
           sed -i 's|gcr.io/$PROJECT_ID/$APP_NAME:.*|gcr.io/$PROJECT_ID/$APP_NAME:$TAG_NAME|' ./app.yaml
-          
-          kubectl apply --namespace production --recursive -f k8s/deployments/prod
-          kubectl apply --namespace production --recursive -f k8s/services
