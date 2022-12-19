@@ -14,7 +14,7 @@ steps:
     args: 
       - '-c'
       - |
-          gcloud container images add-tag gcr.io/$PROJECT_ID/$APP_NAME:myapp \
+          gcloud container images add-tag gcr.io/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1 \
             gcr.io/$PROJECT_ID/$APP_NAME:$TAG_NAME \
             --quiet
 
