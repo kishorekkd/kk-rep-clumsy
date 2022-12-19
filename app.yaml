@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-app
+  labels:
+    app: quiz-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: quiz-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: quiz-app
+        tier: frontend
+    spec:
+      containers:
+      - name: my-first-cluster-1
+        image: gcr.io/casestudy-2-370804/quickstart-image
+        imagePullPolicy: Always
+        ports:
+        - name: http-server
+          containerPort: 8080
+        env:
+          - name: GCLOUD_PROJECT
+            value: casestudy-2-370804
+          - name: GCLOUD_BUCKET
+            value: casestudy-2-370804-media
