@@ -2,10 +2,10 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'asia-south1-docker.pkg.dev/${PROJECT_ID}/art-bird/art-bird-image', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/kk-master/kk-master-image', 
            '.']
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 
-           'asia-south1-docker.pkg.dev/${PROJECT_ID}/art-bird/art-bird-image']
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/kk-master/kk-master-image']
