@@ -4,5 +4,5 @@ steps:
   args: [ 'build', '-t', 'us-west2-docker.pkg.dev/$PROJECT_ID/clumsy-docker-repo2/clumsy-image]
   #Docker Push
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-west2-docker.pkg.dev/$PROJECT_ID/clumsy-docker-repo2/clumsy-image]
+  args: [ 'push', '-t', 'us-west2-docker.pkg.dev/$PROJECT_ID/clumsy-docker-repo2/clumsy-image]
  
