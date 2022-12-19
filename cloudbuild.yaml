@@ -1,19 +1,24 @@
-
-#steps:
-#- name: 'gcr.io/cloud-builders/docker'
-#  args: [ 'build', '-t', 'us-west2-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1', '.' ]
-#images:
-#- 'us-west2-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
-
 steps:
-### Add Tag
+  #Docker Build
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-west2-docker.pkg.dev/$PROJECT_ID/clumsy-docker-repo2/clumsy-image:tagteju', '.' ]
+images:
+- 'us-west2-docker.pkg.dev/$PROJECT_ID/clumsy-docker-repo2/clumsy-image:tagteju'
+  #Docker Push
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-west2-docker.pkg.dev/$PROJECT_ID/clumsy-docker-repo2/clumsy-image:tagteju', '.' ]
+  # Entrypoint, timeout and environment variables
+ - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    timeout: 240s
+    args: ['compute', 'instances', 
+           'create-with-container', 'my-vm-name',
+           '--container-image', 
+           'us-central1-docker.pkg.dev/${PROJECT_ID}/clumsy-docker-repo2/clumsy-image:tagteju']
 
-  - id: 'add-tag'
-    name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args: 
-      - '-c'
-      - |
-          gcloud container images add-tag gcr.io/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1 \
-            gcr.io/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1 \
-            --quiet
+
+
+
+#    env:
+# - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+#      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
