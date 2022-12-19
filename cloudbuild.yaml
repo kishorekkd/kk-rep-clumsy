@@ -17,23 +17,3 @@ steps:
           gcloud container images add-tag gcr.io/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1 \
             gcr.io/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1 \
             --quiet
-
-
-
-### Deploy
-  - id: 'deploy'
-    name: 'gcr.io/cloud-builders/gcloud'
-    env:
-      - 'KUBECONFIG=/kube/config'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-          PROJECT=$$(gcloud config get-value core/project)          
-
-          gcloud container clusters get-credentials "${_CLUSTER}" \
-            --project "$${PROJECT}" \
-            --zone "${_ZONE}"   
-         
-
-          sed -i 's|gcr.io/$PROJECT_ID/$APP_NAME:.*|gcr.io/$PROJECT_ID/$APP_NAME:$TAG_NAME|' ./app.yaml
